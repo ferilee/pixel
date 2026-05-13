@@ -15,7 +15,8 @@ import { serveStatic } from 'hono/bun'
 
 const rootApp = new Hono()
 const app = new Hono()
-const sqlite = new Database('sqlite.db')
+const DB_PATH = process.env.DB_PATH || 'sqlite.db'
+const sqlite = new Database(DB_PATH)
 const db = drizzle(sqlite, { schema })
 
 const google = new Google(
