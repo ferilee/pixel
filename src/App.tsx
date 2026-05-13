@@ -1629,6 +1629,9 @@ function App() {
                   <div className="space-y-1">
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Interactive Prompt Editor</span>
                     <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">Klik teks untuk menyalin bagian tertentu</p>
+                    <p className="text-[10px] text-amber-500 font-bold uppercase tracking-widest mt-1 flex items-center gap-1.5 bg-amber-500/10 w-fit px-2 py-1 rounded-md">
+                      <Info size={12} /> Paste prompt ini ke Midjourney, Leonardo.Ai, atau Bing Image Creator
+                    </p>
                   </div>
                   <div className="flex gap-3">
                     <button 
