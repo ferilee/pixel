@@ -137,7 +137,7 @@ function App() {
     if (!token) return
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/me', {
+      const res = await fetch(`${API_URL}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       console.log('Auth check response status:', res.status)
@@ -171,7 +171,7 @@ function App() {
 
   const handleLogin = () => {
     console.log("Redirecting to login...");
-    window.location.href = `${API_URL}/api/auth/google'
+    window.location.href = `${API_URL}/api/auth/google`
   }
 
   const handleLogout = () => {
@@ -186,19 +186,19 @@ function App() {
   }
 
   const fetchRegencies = async (provinceId: string) => {
-    const res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json')
+    const res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
     const data = await res.json()
     setRegencies(data)
   }
 
   const fetchDistricts = async (regencyId: string) => {
-    const res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regencyId}.json')
+    const res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regencyId}.json`)
     const data = await res.json()
     setDistricts(data)
   }
 
   const fetchVillages = async (districtId: string) => {
-    const res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${districtId}.json')
+    const res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${districtId}.json`)
     const data = await res.json()
     setVillages(data)
   }
@@ -208,7 +208,7 @@ function App() {
     try {
       const token = localStorage.getItem('pixel_token')
       const address = `${profileForm.village}, ${profileForm.district}, ${profileForm.regency}, ${profileForm.province}`
-      const res = await fetch(`${API_URL}/api/v1/profile', {
+      const res = await fetch(`${API_URL}/api/v1/profile`, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
@@ -246,7 +246,7 @@ function App() {
   const handleAddUser = async () => {
     try {
       const token = localStorage.getItem('pixel_token')
-      const res = await fetch(`${API_URL}/api/admin/users', {
+      const res = await fetch(`${API_URL}/api/admin/users`, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ function App() {
     if (!confirm('Apakah Anda yakin ingin menghapus pengguna ini? Semua data terkait juga akan dihapus.')) return
     try {
       const token = localStorage.getItem('pixel_token')
-      const res = await fetch(`${API_URL}/api/admin/users/${id}', {
+      const res = await fetch(`${API_URL}/api/admin/users/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -286,7 +286,7 @@ function App() {
       const token = localStorage.getItem('pixel_token')
       if (!token) return
       
-      const res = await fetch(`${API_URL}/api/admin/stats', {
+      const res = await fetch(`${API_URL}/api/admin/stats`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       if (res.ok) {
@@ -300,7 +300,7 @@ function App() {
 
   const fetchGallery = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/gallery')
+      const res = await fetch(`${API_URL}/api/gallery`)
       const data = await res.json()
       setGallery(Array.isArray(data) ? data : [])
     } catch (e) { console.error(e) }
@@ -310,7 +310,7 @@ function App() {
     try {
       const token = localStorage.getItem('pixel_token')
       if (!token) return
-      const res = await fetch(`${API_URL}/api/presets', {
+      const res = await fetch(`${API_URL}/api/presets`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const data = await res.json()
@@ -323,7 +323,7 @@ function App() {
     if (!name) return
     try {
       const token = localStorage.getItem('pixel_token')
-      await fetch(`${API_URL}/api/presets', {
+      await fetch(`${API_URL}/api/presets`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -340,7 +340,7 @@ function App() {
     if (!confirm('Hapus preset ini?')) return
     try {
       const token = localStorage.getItem('pixel_token')
-      await fetch(`${API_URL}/api/presets/${id}', {
+      await fetch(`${API_URL}/api/presets/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -352,7 +352,7 @@ function App() {
   const toggleVisibility = async (id: number, isPublic: boolean) => {
     try {
       const token = localStorage.getItem('pixel_token')
-      await fetch(`${API_URL}/api/prompts/${id}/visibility', {
+      await fetch(`${API_URL}/api/prompts/${id}/visibility`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -379,7 +379,7 @@ function App() {
     for (const subject of subjects) {
         try {
             const token = localStorage.getItem('pixel_token')
-            const res = await fetch(`${API_URL}/api/generate', {
+            const res = await fetch(`${API_URL}/api/generate`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -407,7 +407,7 @@ function App() {
       const headers: any = {}
       if (token) headers['Authorization'] = `Bearer ${token}`
       
-      const res = await fetch(`${API_URL}/api/history', { headers })
+      const res = await fetch(`${API_URL}/api/history`, { headers })
       const data = await res.json()
       setHistory(data)
     } catch (e) {
@@ -419,7 +419,7 @@ function App() {
     const token = localStorage.getItem('pixel_token')
     if (!token) return
     try {
-      const res = await fetch(`${API_URL}/api/folders', {
+      const res = await fetch(`${API_URL}/api/folders`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const data = await res.json()
@@ -433,7 +433,7 @@ function App() {
     const token = localStorage.getItem('pixel_token')
     if (!token) return
     try {
-      const res = await fetch(`${API_URL}/api/prompts/${promptId}/meta', {
+      const res = await fetch(`${API_URL}/api/prompts/${promptId}/meta`, {
         method: 'PATCH',
         headers: { 
           'Content-Type': 'application/json',
@@ -454,7 +454,7 @@ function App() {
     const token = localStorage.getItem('pixel_token')
     if (!token) return
     try {
-      const res = await fetch(`${API_URL}/api/folders', {
+      const res = await fetch(`${API_URL}/api/folders`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -481,7 +481,7 @@ function App() {
       const formData = new FormData()
       formData.append('image', file)
 
-      const res = await fetch(`${API_URL}/api/analyze-image', {
+      const res = await fetch(`${API_URL}/api/analyze-image`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData
@@ -513,7 +513,7 @@ function App() {
       const headers: any = { 'Content-Type': 'application/json' }
       if (token) headers['Authorization'] = `Bearer ${token}`
 
-      const res = await fetch(`${API_URL}/api/generate', {
+      const res = await fetch(`${API_URL}/api/generate`, {
         method: 'POST',
         headers,
         body: JSON.stringify(formData)
@@ -579,7 +579,7 @@ function App() {
     }, 200)
 
     try {
-      const res = await fetch(`${API_URL}/api/summarize', {
+      const res = await fetch(`${API_URL}/api/summarize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: sourceText })
@@ -734,7 +734,7 @@ function App() {
             >
                 <Zap size={14} className={isLimitReached ? 'text-red-500' : 'text-yellow-500'} />
                 <span className="text-[11px] font-black uppercase tracking-widest">
-                    {user.role === 'admin' ? 'UNLIMITED' : `${user.usageCount} / ${user.limit}'} Tokens
+                    {user.role === 'admin' ? 'UNLIMITED' : `${user.usageCount} / ${user.limit}`} Tokens
                 </span>
             </button>
             <div className="hidden md:flex items-center gap-3 px-3 py-1.5 bg-secondary/50 rounded-full border border-border">
@@ -1516,7 +1516,7 @@ function App() {
                             <span className="text-[11px] font-bold text-muted-foreground">Contact</span>
                             {viewUser.contact ? (
                                 <a 
-                                    href={viewUser?.contact?.startsWith('@') ? `https://t.me/${viewUser.contact.substring(1)}` : `https://wa.me/${viewUser?.contact?.replace(/\D/g, '')}'}
+                                    href={viewUser?.contact?.startsWith('@') ? `https://t.me/${viewUser.contact.substring(1)}` : `https://wa.me/${viewUser?.contact?.replace(/\D/g, '')}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-[10px] font-black bg-primary text-white px-3 py-1 rounded-lg hover:scale-105 transition-all flex items-center gap-1 shadow-lg shadow-primary/20"
@@ -1862,7 +1862,7 @@ function App() {
                 customAlert?.type === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-500' :
                 customAlert?.type === 'error' ? 'bg-red-500/10 border-red-500/20 text-red-500' :
                 'bg-primary/10 border-primary/20 text-primary'
-              }'}>
+              }`}>
                 {customAlert?.type === 'success' ? <CheckCircle2 size={32} /> :
                  customAlert?.type === 'error' ? <AlertCircle size={32} /> :
                  <Info size={32} />}
@@ -1881,7 +1881,7 @@ function App() {
                   customAlert?.type === 'success' ? 'bg-green-500 text-white border-green-600 shadow-lg shadow-green-500/20' :
                   customAlert?.type === 'error' ? 'bg-red-500 text-white border-red-600 shadow-lg shadow-red-500/20' :
                   'bg-primary text-white border-primary-600 shadow-lg shadow-primary/20'
-                }'}
+                }`}
               >
                 MENGERTI
               </button>
