@@ -1,24 +1,12 @@
 version: '3.8'
 
 services:
-  pixel-frontend:
+  pixel-app:
     image: ghcr.io/ferilee/pixel:latest
-    container_name: pixel-frontend
-    command: bunx serve -s dist -l 3333
-    ports:
-      - "3333:3333"
-    environment:
-      - NODE_ENV=production
-    restart: unless-stopped
-    networks:
-      - pixel-network
-
-  pixel-backend:
-    image: ghcr.io/ferilee/pixel:latest
-    container_name: pixel-backend
+    container_name: pixel-app
     command: bun run server
     ports:
-      - "3334:3334"
+      - "3333:3334"
     volumes:
       - pixel-data:/app/sqlite.db
     env_file:

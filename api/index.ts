@@ -11,7 +11,10 @@ import { Google, generateState, generateCodeVerifier } from 'arctic'
 import { sign, verify } from 'hono/jwt'
 import { setCookie, getCookie } from 'hono/cookie'
 
-const app = new Hono().basePath('/api')
+import { serveStatic } from 'hono/bun'
+
+const rootApp = new Hono()
+const app = new Hono()
 const sqlite = new Database('sqlite.db')
 const db = drizzle(sqlite, { schema })
 
@@ -649,7 +652,12 @@ app.post('/summarize', async (c) => {
   }
 })
 
+rootApp.route('/api', app)
+
+rootApp.use('*', serveStatic({ root: './dist' }))
+rootApp.get('*', serveStatic({ path: './dist/index.html' }))
+
 export default {
-  port: 3334,
-  fetch: app.fetch,
+  port: process.env.PORT || 3334,
+  fetch: rootApp.fetch,
 }
