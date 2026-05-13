@@ -1,0 +1,21 @@
+Edited schema.ts
+Ran command: `sqlite3 sqlite.db "ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user';"`
+Edited index.ts
+Edited App.tsx
+
+Sistem pembatasan (limitasi) telah berhasil diimplementasikan baik di sisi backend maupun frontend. Berikut adalah detail fungsionalitas barunya:
+
+### 1. Aturan Limitasi (Token System)
+- **Batas**: 3 kali generate setiap 7 hari untuk role `user`.
+- **Backend Enforcement**: API `/generate` sekarang akan menghitung jumlah proyek yang Anda buat dalam 7 hari terakhir. Jika sudah mencapai 3, API akan menolak permintaan dengan error `403 Forbidden`.
+
+### 2. UI Dashboard Terkunci
+- **Indikator Token**: Di bagian Navbar, sekarang muncul status penggunaan token Anda (misal: `1 / 3 Tokens`).
+- **Overlay "Akses Terkunci"**: Jika limit sudah tercapai, seluruh area Constructor akan tertutup oleh overlay transparan dengan efek blur yang cantik, menampilkan pesan: *"Anda telah mencapai batas 3 generate dalam 7 hari. Silakan tunggu hari ke-8 atau upgrade ke PRO."*
+- **Tombol Upgrade**: Menambahkan tombol ajakan untuk berlangganan PRO di tengah layar yang terkunci.
+
+### 3. Database Update
+- Menambahkan kolom `role` pada tabel `users` (default: `user`). Anda bisa secara manual mengubah role menjadi `pro` di database untuk melewati pembatasan ini.
+
+### Langkah Penting:
+Silakan **restart server backend** (Ctrl+C lalu `bun run server`) agar logika penghitungan token yang baru dapat berjalan. Selamat mencoba!_
