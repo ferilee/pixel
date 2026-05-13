@@ -5,6 +5,10 @@ WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install
 
+# Set environment variable for build
+ARG VITE_API_URL=https://pixel.gemastika.or.id
+ENV VITE_API_URL=$VITE_API_URL
+
 # Copy source code and build frontend
 COPY . .
 RUN bun run build
