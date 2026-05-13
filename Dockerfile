@@ -21,6 +21,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/api ./api
 COPY --from=builder /app/package.json ./
+COPY --from=builder /app/drizzle.config.ts ./
 
 # Expose ports for both frontend (3333) and backend (3334)
 EXPOSE 3333 3334
