@@ -17,6 +17,12 @@ const rootApp = new Hono()
 const app = new Hono()
 const DB_PATH = process.env.DB_PATH || 'sqlite.db'
 const sqlite = new Database(DB_PATH)
+
+// Auto-migrate new profile columns
+try { sqlite.run("ALTER TABLE users ADD COLUMN address TEXT"); } catch (e) {}
+try { sqlite.run("ALTER TABLE users ADD COLUMN contact TEXT"); } catch (e) {}
+try { sqlite.run("ALTER TABLE users ADD COLUMN profile_complete INTEGER DEFAULT 0"); } catch (e) {}
+
 const db = drizzle(sqlite, { schema })
 
 const google = new Google(
